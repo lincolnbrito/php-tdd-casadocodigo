@@ -19,7 +19,7 @@
                 "src/CDC/Loja",
                 "test/CDC/Loja"
             ],
-            "CDC\\Exemplos": [
+            "CDC\\Exemplos\\": [
                 "src/CDC/Exemplos",
                 "test/CDC/Exemplos"
             ]
