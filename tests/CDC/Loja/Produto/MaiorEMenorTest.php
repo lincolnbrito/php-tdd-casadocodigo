@@ -35,5 +35,8 @@ class MaiorEMenorTest extends TestCase
 
         $this->assertEquals("Geladeira", $maiorMenor->getMenor()->getNome());
         $this->assertEquals("Geladeira", $maiorMenor->getMaior()->getNome());
+
+        //assegurando que o produto retornado é uma instância de Produto
+        $this->assertInstanceOf(Produto::class,$maiorMenor->getMaior());
     }
 }
