@@ -19,7 +19,7 @@ class MaiorEMenorTest extends TestCase
 
         $maiorMenor = new MaiorEMenor();
         $maiorMenor->encontra($carrinho);
-
+        
         $this->assertEquals("Jogo de pratos", $maiorMenor->getMenor()->getNome());
         $this->assertEquals("Geladeira", $maiorMenor->getMaior()->getNome());
     }

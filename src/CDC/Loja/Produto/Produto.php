@@ -19,6 +19,6 @@ class Produto
 
     public function getValor()
     {
-        return $this->valor();
+        return $this->valor;
     }
 }

@@ -2,7 +2,7 @@
 namespace CDC\Loja\Carrinho;
 
 use CDC\Loja\Produto\Produto;
-use \ArrayObject;
+use ArrayObject;
 
 class CarrinhoDeCompras
 {
@@ -10,7 +10,7 @@ class CarrinhoDeCompras
 
     public function __construct()
     {
-        $this->produtos = new \ArrayObject();        
+        $this->produtos = new ArrayObject();        
     }
 
     public function adiciona(Produto $produto)
@@ -27,7 +27,7 @@ class CarrinhoDeCompras
 
     public function maiorValor()
     {
-        if(count($this->getItens()) === 0 ) {
+        if(count($this->getProdutos()) === 0 ) {
             return 0;
         }
 
@@ -39,7 +39,7 @@ class CarrinhoDeCompras
             }
         }
 
-        return $mairoValor;
+        return $maiorValor;
 
     }
 }
