@@ -32,7 +32,7 @@ class CalculadoraDeSalarioTest extends TestCase
 
         $this->assertEquals(4000.0 * 0.8, $salario, null, 0.00001);
     }
-
+/*
     public function testCalculoSalarioDBAsComSalarioAbaixoDoLimite()
     {
         $calculadora = new CalculadoraDeSalario();
@@ -43,5 +43,5 @@ class CalculadoraDeSalarioTest extends TestCase
         $salario = $calculadora->calculaSalario($dba);
 
         $this->assertEquals(500.0 * 0.85, $salario, null, 0.00001);
-    }
+    }*/
 }
