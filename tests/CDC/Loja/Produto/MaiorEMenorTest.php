@@ -13,9 +13,9 @@ class MaiorEMenorTest extends TestCase
     {
         $carrinho = new CarrinhoDeCompras();
 
-        $carrinho->adiciona(new Produto("Geladeira",450.00));
-        $carrinho->adiciona(new Produto("Liquidificador",250.00));
-        $carrinho->adiciona(new Produto("Jogo de pratos",70.00));
+        $carrinho->adiciona(new Produto("Geladeira",450.00, 1));
+        $carrinho->adiciona(new Produto("Liquidificador",250.00, 1));
+        $carrinho->adiciona(new Produto("Jogo de pratos",70.00, 1));
 
         $maiorMenor = new MaiorEMenor();
         $maiorMenor->encontra($carrinho);
@@ -28,7 +28,7 @@ class MaiorEMenorTest extends TestCase
     {
         $carrinho = new CarrinhoDeCompras();
 
-        $carrinho->adiciona(new Produto("Geladeira", 450.00));
+        $carrinho->adiciona(new Produto("Geladeira", 450.00, 1));
 
         $maiorMenor = new MaiorEMenor();
         $maiorMenor->encontra($carrinho);
