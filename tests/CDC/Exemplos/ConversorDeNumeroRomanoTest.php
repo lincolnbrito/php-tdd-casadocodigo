@@ -13,4 +13,13 @@ class ConversorDeNumeroRomanoTest extends TestCase
 
         $this->assertEquals(1, $numero);
     }
+
+    public function testDeveEntenderOSimboloV()
+    {
+        $romano = new ConversorDeNumeroRomano();
+        $numero = $romano->converte("V");
+
+        $this->assertEquals(5, $numero);
+    }
+    
 }
