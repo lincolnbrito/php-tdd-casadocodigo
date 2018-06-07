@@ -37,5 +37,21 @@ class ConversorDeNumeroRomanoTest extends TestCase
 
         $this->assertEquals(3, $numero);
     }
+
+    public function testDeveEntenderOSimboloXXII()
+    {
+        $romano = new ConversorDeNumeroRomano();
+        $numero = $romano->converte("XXII");
+
+        $this->assertEquals(22, $numero);
+    }
+
+    public function testDeveEntenderOSimboloIX()
+    {
+        $romano = new ConversorDeNumeroRomano();
+        $numero = $romano->converte("IX");
+
+        $this->assertEquals(9, $numero);
+    }
     
 }
