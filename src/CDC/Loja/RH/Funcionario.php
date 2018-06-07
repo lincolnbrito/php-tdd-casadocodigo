@@ -16,7 +16,7 @@ class Funcionario
 
     public function getNome()
     {
-        $return $this->nome;
+        return $this->nome;
     }
 
     public function getSalario()
