@@ -1,9 +1,8 @@
 <?php
 namespace CDC\Loja\Carrinho;
 
-use PHPUnit\Framework\TestCase;
-
-use CDC\Loja\Carrinho\CarrinhoDeCompras,
+use CDC\Loja\Test\TestCase,
+    CDC\Loja\Carrinho\CarrinhoDeCompras,
     CDC\Loja\Carrinho\MaiorPreco;
 
 class MaiorPrecoTest extends TestCase
