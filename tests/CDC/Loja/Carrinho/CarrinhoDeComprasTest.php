@@ -2,6 +2,7 @@
 namespace CDC\Loja\Carrinho;
 
 use CDC\Loja\Test\TestCase,
+    CDC\Loja\Test\CarrinhoDeComprasBuilder,
     CDC\Loja\Carrinho\CarrinhoDeCompras,
     CDC\Loja\Produto\Produto;
 
@@ -38,6 +39,17 @@ class CarrinhoDeComprasTest extends TestCase
         $this->carrinho->adiciona(new Produto("Máquina de lavar", 750.00, 1));
 
         $valor = $this->carrinho->maiorValor();
+
+        $this->assertEquals(1500.00, $valor, null, 0.00001);
+    }
+
+    public function testDeveRetornarMaiorValorSeCarrinhoComMuitosElementosBuilder()
+    {
+        $carrinho = (new CarrinhoDeComprasBuilder())
+                    ->comItens(900.00, 1500.00, 750.00)
+                    ->cria();
+        
+        $valor = $carrinho->maiorValor();
 
         $this->assertEquals(1500.00, $valor, null, 0.00001);
     }
