@@ -15,7 +15,7 @@ class CarrinhoDeComprasTest extends TestCase
         parent::setUp();
     }
 
-    public function testDeveRetornarZeroSeCarrinhoVazio()
+    public function test_deve_retornar_zero_se_carrinho_vazio()
     {
         $valor = $this->carrinho->maiorValor();
         $this->assertEquals(0, $valor, null, 0.00001);
