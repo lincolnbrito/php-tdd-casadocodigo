@@ -14,7 +14,10 @@ class GeradorDeNotaFicalTest extends TestCase
         $dao = Mockery::mock("CDC\Loja\Dao\NFDao");
         $dao->shouldReceive("persiste")->andReturn(true);
 
-        $gerador = new GeradorDeNotaFiscal($dao);
+        $sap = Mockery::mock("CDC\Loja\SAP\SAP");
+        $sap->shouldReceive("envia")->andReturn(true);
+
+        $gerador = new GeradorDeNotaFiscal($dao, $sap);
         $pedido = new Pedido("Andre", 1000, 1);
 
         $nf = $gerador->gera($pedido);
@@ -27,7 +30,10 @@ class GeradorDeNotaFicalTest extends TestCase
         $dao = Mockery::mock("CDC\Loja\Dao\NFDao");
         $dao->shouldReceive("persiste")->andReturn(true);
 
-        $gerador = new GeradorDeNotaFiscal($dao);
+        $sap = Mockery::mock("CDC\Loja\SAP\SAP");
+        $sap->shouldReceive("envia")->andReturn(true);
+
+        $gerador = new GeradorDeNotaFiscal($dao, $sap);
         
         $pedido = new Pedido("Andre", 1000, 1);
         $nf = $gerador->gera($pedido);
@@ -43,5 +49,13 @@ class GeradorDeNotaFicalTest extends TestCase
 
         $sap = Mockery::mock("CDC\Loja\SAP\SAP");
         $sap->shouldReceive("envia")->andReturn(true);
+
+        $gerador = new GeradorDeNotaFiscal($dao, $sap);
+
+        $pedido = new Pedido("Andre", 1000, 1);
+        $nf = $gerador->gera($pedido);
+
+        $this->assertTrue($sap->envia($nf));
+        $this->assertEquals(1000 * 0.94, $nf->getValor(), null, 0.00001);
     }
 }
