@@ -7,6 +7,13 @@ use \DateTime;
 
 class GeradorDeNotaFiscal
 {
+    private $dao;
+
+    public function __construct(NFDao $dao)
+    {
+        $this->dao = $dao;
+    }
+
     public function gera(Pedido $pedido)
     {
         $nf =  new NotaFiscal(
@@ -15,8 +22,7 @@ class GeradorDeNotaFiscal
             new \DateTime()
         );
 
-        $nfDao = new NFDao();
-        if( $nfDao->persiste($nf) ) {
+        if( $this->dao->persiste($nf) ) {
             return $nf;
         }
         return null;
