@@ -35,4 +35,13 @@ class GeradorDeNotaFicalTest extends TestCase
         $this->assertTrue($dao->persiste($nf));
         $this->assertEquals(1000 * 0.94, $nf->getValor(), null, 0.00001);
     }
+
+    public function testDeveEnviarNFGeradaParaSAP()
+    {
+        $dao = Mockery::mock("CDC\Loja\DAO\NFDao");
+        $dao->shouldReceive("persiste")->andReturn(true);
+
+        $sap = Mockery::mock("CDC\Loja\SAP\SAP");
+        $sap->shouldReceive("envia")->andReturn(true);
+    }
 }
