@@ -2,8 +2,8 @@
 namespace CDC\Loja\FluxoDeCaixa;
 
 use CDC\Loja\Test\TestCase,
-    CDC\Loja\DAO\NFDao,
     CDC\Loja\FluxoDeCaixa\Pedido,
+    CDC\Exemplos\RelogioDoSistema,
     CDC\Loja\FluxoDeCaixa\GeradorDeNotaFical;
 use Mockery;
 
@@ -21,7 +21,7 @@ class GeradorDeNotaFicalTest extends TestCase
         );
         $acao2->shouldReceive("executa")->andReturn(true);
 
-        $gerador = new GeradorDeNotaFiscal([$acao1, $acao2]);
+        $gerador = new GeradorDeNotaFiscal([$acao1, $acao2], new RelogioDoSistema());
 
         $pedido = new Pedido("Andre", 1000, 1);
         $nf = $gerador->gera($pedido);
