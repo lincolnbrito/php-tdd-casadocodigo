@@ -9,53 +9,26 @@ use Mockery;
 
 class GeradorDeNotaFicalTest extends TestCase
 {
-    public function testDeveGerarNFComValorDeImpostoDescontado()
+    public function testDeveInvocarAcoesPosteriores()
     {
-        $dao = Mockery::mock("CDC\Loja\Dao\NFDao");
-        $dao->shouldReceive("persiste")->andReturn(true);
+        $acao1 = Mockery::mock(
+            "CDC\Loja\FluxoDeCaixa\AcaoAposGerarNotaInterface"
+        );
+        $acao1->shouldReceive("executa")->andReturn(true);
 
-        $sap = Mockery::mock("CDC\Loja\SAP\SAP");
-        $sap->shouldReceive("envia")->andReturn(true);
+        $acao2 = Mockery::mock(
+            "CDC\Loja\FluxoDeCaixa\AcaoAposGerarNotaInterface"
+        );
+        $acao2->shouldReceive("executa")->andReturn(true);
 
-        $gerador = new GeradorDeNotaFiscal($dao, $sap);
-        $pedido = new Pedido("Andre", 1000, 1);
-
-        $nf = $gerador->gera($pedido);
-
-        $this->assertEquals(1000*0.94, $nf->getValor(), null, 0.00001);
-    }
-
-    public function testDevePersistirNFGerada()
-    {
-        $dao = Mockery::mock("CDC\Loja\Dao\NFDao");
-        $dao->shouldReceive("persiste")->andReturn(true);
-
-        $sap = Mockery::mock("CDC\Loja\SAP\SAP");
-        $sap->shouldReceive("envia")->andReturn(true);
-
-        $gerador = new GeradorDeNotaFiscal($dao, $sap);
-        
-        $pedido = new Pedido("Andre", 1000, 1);
-        $nf = $gerador->gera($pedido);
-
-        $this->assertTrue($dao->persiste($nf));
-        $this->assertEquals(1000 * 0.94, $nf->getValor(), null, 0.00001);
-    }
-
-    public function testDeveEnviarNFGeradaParaSAP()
-    {
-        $dao = Mockery::mock("CDC\Loja\DAO\NFDao");
-        $dao->shouldReceive("persiste")->andReturn(true);
-
-        $sap = Mockery::mock("CDC\Loja\SAP\SAP");
-        $sap->shouldReceive("envia")->andReturn(true);
-
-        $gerador = new GeradorDeNotaFiscal($dao, $sap);
+        $gerador = new GeradorDeNotaFiscal([$acao1, $acao2]);
 
         $pedido = new Pedido("Andre", 1000, 1);
         $nf = $gerador->gera($pedido);
 
-        $this->assertTrue($sap->envia($nf));
-        $this->assertEquals(1000 * 0.94, $nf->getValor(), null, 0.00001);
+        $this->assertTrue($acao1->executa($nf));
+        $this->assertTrue($acao2->executa($nf));
+        $this->assertNotNull($nf);
+        $this->assertInstanceOf("CDC\Loja\FluxoDeCaixa\NotaFiscal", $nf);
     }
 }
