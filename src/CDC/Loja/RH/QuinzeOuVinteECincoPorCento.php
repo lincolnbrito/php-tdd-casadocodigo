@@ -1,16 +1,23 @@
 <?php
 namespace CDC\Loja\RH;
 
-use CDC\Loja\RH\IRegraDeCalculo,
+use CDC\Loja\RH\RegraDeCalculo,
     CDC\Loja\RH\Funcionario;
 
-class QuinzeOuVinteECincoPorCento implements IRegraDeCalculo
+class QuinzeOuVinteECincoPorCento extends RegraDeCalculo
 {
-    public function calcula( Funcionario $funcionario )
+    protected function porcentagemBase()
     {
-        if( $funcionario->getSalario() < 2500 ){
-            return $funcionario->getSalario() * 0.85;
-        }
-        return $funcionario->getSalario() * 0.75;
+        return 0.85;
     }
+
+    protected function porcentagemAcimaDoLimite()
+    {
+        return 0.75;
+    }
+
+    protected function limite()
+    {
+        return 2500;
+    }   
 }
