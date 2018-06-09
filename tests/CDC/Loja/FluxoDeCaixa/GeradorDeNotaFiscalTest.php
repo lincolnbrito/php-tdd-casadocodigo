@@ -2,6 +2,7 @@
 namespace CDC\Loja\FluxoDeCaixa;
 
 use CDC\Loja\Test\TestCase,
+    CDC\Loja\DAO\NFDao,
     CDC\Loja\FluxoDeCaixa\Pedido,
     CDC\Loja\FluxoDeCaixa\GeradorDeNotaFical;
 
