@@ -2,18 +2,17 @@
 namespace CDC\Loja\FluxoDeCaixa;
 
 use CDC\Loja\FluxoDeCaixa\Pedido,
-    CDC\Loja\FluxoDeCaixa\NotaFiscal,
-    CDC\Loja\DAO\NFDao,
-    CDC\Loja\SAP\SAP;
-use \DateTime;
+    CDC\Exemplos\RelogioInterface;
 
 class GeradorDeNotaFiscal
 {
     private $acoes;
+    private $relogio;
 
-    public function __construct($acoes)
+    public function __construct($acoes, RelogioInterface $relogio)
     {
         $this->acoes = $acoes;
+        $this->relogio = $relogio;
     }
 
     public function gera(Pedido $pedido)
@@ -21,7 +20,7 @@ class GeradorDeNotaFiscal
         $nf =  new NotaFiscal(
             $pedido->getCliente(),
             $pedido->getValorTotal() * 0.94,
-            new \DateTime()
+            $this->relogio->hoje()
         );
 
         foreach($this->acoes as $acao) {
