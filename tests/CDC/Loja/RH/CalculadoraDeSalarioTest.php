@@ -56,4 +56,28 @@ class CalculadoraDeSalarioTest extends TestCase
 
         $this->assertEquals(4500.0 * 0.75, $salario, null, 0.00001);
     }
+
+    public function testCalculoSalarioTestadorComSalarioAbaixoDoLimite()
+    {
+        $calculadora = new CalculadoraDeSalario();
+        $testador = new Funcionario(
+            "Mauricio", 2000.0, TabelaCargos::TESTADOR
+        );
+
+        $salario = $calculadora->calculaSalario($testador);
+
+        $this->assertEquals(2000.0 * 0.85, $salario, null, 0.00001);
+    }
+
+    public function testCalculoSalarioTestadorComSalarioAcimaDoLimite()
+    {
+        $calculadora = new CalculadoraDeSalario();
+        $testador = new Funcionario(
+            "Mauricio", 4500.0, TabelaCargos::TESTADOR
+        );
+
+        $salario = $calculadora->calculaSalario($testador);
+
+        $this->assertEquals(4500.0 * 0.75, $salario, null, 0.00001);
+    }
 }
