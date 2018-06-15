@@ -18,6 +18,21 @@ class Fatura
         $this->pago = false;
     }
 
+    public function adicionaPagamento(Pagamento $pagamento)
+    {
+        $this->pagamentos->append($pagamento);
+
+        $valorTotal = 0;
+
+        foreach($this->pagamentos as $p ) {
+            $valorTotal += $p->getValor();
+        }
+
+        if( $valorTotal >= $this->valor ) {
+            $this->pago = true;
+        }
+    }
+
     public function getPagamentos()
     {
         return $this->pagamentos;

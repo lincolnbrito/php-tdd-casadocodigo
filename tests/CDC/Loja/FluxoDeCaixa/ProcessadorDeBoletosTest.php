@@ -18,9 +18,9 @@ class ProcessadorDeBoletosTest extends TestCase
 
         $boletos = new ArrayObject();
         $boletos->append($boleto);
-
+        
         $processador->processa($boletos, $fatura);
-
+        
         $this->assertEquals(1, count($fatura->getPagamentos()));
         $this->assertEquals(150.0, $fatura->getPagamentos()[0]->getValor(), null, 0.00001);
     }
