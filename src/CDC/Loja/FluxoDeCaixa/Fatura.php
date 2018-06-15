@@ -33,6 +33,13 @@ class Fatura
         }
     }
 
+    public function adicionaPagamentoLote($pagamentos)
+    {
+        foreach($pagamentos as $pagamento) {
+            $this->adicionaPagamento($pagamento);
+        }
+    }
+
     public function getPagamentos()
     {
         return $this->pagamentos;
