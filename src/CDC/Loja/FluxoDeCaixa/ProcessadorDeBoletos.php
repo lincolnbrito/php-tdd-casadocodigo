@@ -11,6 +11,9 @@ class ProcessadorDeBoletos
 {
     public function processa(ArrayObject $boletos, Fatura $fatura)
     {
+
+        $valorTotal = 0;
+
         //retorna o ArrayObject de pagamentos
         $pagamentosFatura = $fatura->getPagamentos();
         
@@ -18,7 +21,13 @@ class ProcessadorDeBoletos
         {
             $pagamento = new Pagamento($boleto->getValor(), MeioPagamento::BOLETO);
             $pagamentosFatura->append($pagamento);
+
+            $valorTotal += $boleto->getValor();
         }      
+
+        if( $valorTotal >= $fatura->getValor() ){
+            $fatura->setPago(true);
+        }
 
     }
 }
