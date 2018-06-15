@@ -11,10 +11,14 @@ class ProcessadorDeBoletos
 {
     public function processa(ArrayObject $boletos, Fatura $fatura)
     {
-        $boleto = current($boletos);
-
-        $pagamento = new Pagamento($boleto->getValor(), MeioPagamento::BOLETO);
+        //retorna o ArrayObject de pagamentos
         $pagamentosFatura = $fatura->getPagamentos();
-        $pagamentosFatura->append($pagamento);
+        
+        foreach($boletos as $boleto)
+        {
+            $pagamento = new Pagamento($boleto->getValor(), MeioPagamento::BOLETO);
+            $pagamentosFatura->append($pagamento);
+        }      
+
     }
 }
