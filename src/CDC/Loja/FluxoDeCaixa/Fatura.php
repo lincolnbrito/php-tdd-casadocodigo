@@ -15,6 +15,7 @@ class Fatura
         $this->cliente = $cliente;
         $this->valor = $valor;
         $this->pagamentos = new ArrayObject();
+        $this->pago = false;
     }
 
     public function getPagamentos()
