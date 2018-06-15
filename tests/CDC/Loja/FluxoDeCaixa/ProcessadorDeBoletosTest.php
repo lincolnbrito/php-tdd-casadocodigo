@@ -63,4 +63,50 @@ class ProcessadorDeBoletosTest extends TestCase
         $this->assertTrue($fatura->isPago());
         
     }
+
+    public function testDeveMarcarFaturaComoNaoPagaCasoBoletoUnicoNaoPagueTudo()
+    {
+        $processador = new ProcessadorDeBoletos();
+        $fatura = new Fatura("Cliente", 150.0);
+
+        $boletos = new ArrayObject();
+        $boletos->append(new Boleto(50.0));
+
+        $processador->processa($boletos, $fatura);
+
+        $this->assertFalse($fatura->isPago());
+    }
+
+    public function testDeveMarcarFaturaComoPagaCasoMuitosBoletosPaguemTudo()
+    {
+        $processador = new ProcessadorDeBoletos();
+        $fatura = new Fatura("Cliente", 150.0);
+
+        $boletos = new ArrayObject();
+        $boletos->append(new Boleto(40.0));
+        $boletos->append(new Boleto(10.0));
+        $boletos->append(new Boleto(25.0));
+        $boletos->append(new Boleto(25.0));
+        $boletos->append(new Boleto(100.0));
+
+        $processador->processa($boletos, $fatura);
+
+        $this->assertTrue($fatura->isPago());
+    }
+
+    public function testDeveMarcarFaturaComoNaoPagaCasoMuitosBoletosNaoPaguemTudo()
+    {
+        $processador = new ProcessadorDeBoletos();
+        $fatura = new Fatura("Cliente", 150.0);
+
+        $boletos = new ArrayObject();
+        $boletos->append(new Boleto(10.0));
+        $boletos->append(new Boleto(20.0));
+        $boletos->append(new Boleto(15.0));
+        $boletos->append(new Boleto(15.0));        
+
+        $processador->processa($boletos, $fatura);
+
+        $this->assertFalse($fatura->isPago());
+    }
 }
