@@ -1,8 +1,8 @@
 <?php
-namespace Loja\Persistencia;
+namespace CDC\Loja\Persistencia;
 
 use PDO;
-use Loja\Produto\Produto;
+use CDC\Loja\Produto\Produto;
 
 class ProdutoDao
 {
@@ -16,14 +16,14 @@ class ProdutoDao
     public function adiciona(Produto $produto)
     {
         $sqlString = "INSERT INTO `produto` ";
-        $sqlString .= "(descricao, valor_unitario,status) ";
+        $sqlString .= "(descricao, valor_unitario,quantidade) ";
         $sqlString .= "VALUES (?,?,?)";
 
         $stmt = $this->conexao->prepare($sqlString);
 
-        $stmt->bindParam(1, $produto->getDescricao());
-        $stmt->bindParam(2, $produto->getValorUnitario());
-        $stmt->bindParam(3, $produto->getStatus());
+        $stmt->bindValue(1, $produto->getNome());
+        $stmt->bindValue(2, $produto->getValorUnitario());
+        $stmt->bindValue(3, $produto->getQuantidade());
 
         $stmt->execute();
 
