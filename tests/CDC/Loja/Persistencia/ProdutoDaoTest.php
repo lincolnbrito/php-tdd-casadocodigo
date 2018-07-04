@@ -57,6 +57,23 @@ class ProdutoDaoTest extends TestCase
 
     }
 
+    public function testDeveFiltrarAtivos()
+    {
+        $produtoDao = new ProdutoDao($this->conexao);
+
+        $ativo = new Produto("Geladeira", 150.0, 1);
+        $inativo = new Produto("Fogão", 180.0, 1);
+        $inativo->inativa();
+
+        $produtoDao->adiciona($ativo);
+        $produtoDao->adiciona($inativo);
+
+        $produtosAtivos = $produtoDao->ativos();
+
+        $this->assertEquals(1, count($produtosAtivos));
+        $this->assertEquals(150.0, $produtosAtivos[0]["valor_unitario"]);
+    }
+
     protected function tearDown()
     {
         parent::tearDown();
