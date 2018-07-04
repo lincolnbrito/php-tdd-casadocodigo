@@ -6,12 +6,14 @@ class Produto
     private $nome;
     private $valorUnitario;
     private $quantidade;
+    private $status;
 
     public function __construct($nome, $valorUnitario, $quantidade)
     {
         $this->nome = $nome;
         $this->valorUnitario = $valorUnitario;
         $this->quantidade = $quantidade;
+        $this->status = true;
     }
 
     public function getNome()
@@ -32,5 +34,20 @@ class Produto
     public function getValorTotal()
     {
         return $this->valorUnitario * $this->quantidade;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function ativa()
+    {
+        $this->status = true;
+    }
+
+    public function inativa()
+    {
+        $this->status = false;
     }
 }

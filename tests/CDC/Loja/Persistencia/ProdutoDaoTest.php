@@ -31,7 +31,7 @@ class ProdutoDaoTest extends TestCase
     {
         $sqlString = "CREATE TABLE produto ";
         $sqlString .="(id INTEGER PRIMARY KEY, descricao TEXT, ";
-        $sqlString .="valor_unitario TEXT, quantidade INTEGER);";
+        $sqlString .="valor_unitario TEXT, quantidade INTEGER, status TINYINT(1));";
 
         $this->conexao->query($sqlString);
     }
@@ -41,7 +41,7 @@ class ProdutoDaoTest extends TestCase
         //$conn = (new ConexaoComBancoDeDados())->getConexao();
         $produtoDao = new ProdutoDao($this->conexao);
 
-        $produto = new Produto("Geladeira",150.0,1);
+        $produto = new Produto("Geladeira", 150.0, 1, true);
 
         //Sobrescrevendo a conexão para continuar trabalhando
         // sobre a mesma já instanciada
@@ -53,7 +53,7 @@ class ProdutoDaoTest extends TestCase
         
         $this->assertEquals($salvo["descricao"], $produto->getNome());
         $this->assertEquals($salvo["valor_unitario"], $produto->getValorUnitario());
-        $this->assertEquals($salvo["quantidade"], $produto->getQuantidade());
+        $this->assertEquals($salvo["status"], $produto->getStatus());
 
     }
 
