@@ -3,7 +3,7 @@ namespace CDC\Loja\Produto;
 
 use PHPUnit\Framework\TestCase;
 
-use CDC\Loja\Carrinho\CarrinhodeCompras,
+use CDC\Loja\Carrinho\CarrinhoDeCompras,
     CDC\Loja\Produto\Produto,
     CDC\Loja\Produto\MaiorEMenor;
 
